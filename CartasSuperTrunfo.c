@@ -3,12 +3,12 @@
 int main(){
 
     int pontosTur1,pontosTur2,populacao1,populacao2;
-    float area1,area2,pib1,pib2;
+    float area1,area2,pib1,pib2,pibpercapita1,pibpercapita2,denpopulacional1,denpopulacional2;
     char estado1,estado2;
     char cidade1[50],cidade2[50],codc1[4],codc2[4];
 
 
-    //leitura de dados
+    //leitura de dados cidade 1
     printf("Digite as informações da carta 1: \n");
     printf("Estado de A a H: \n"); 
     scanf(" %c", &estado1);
@@ -25,6 +25,7 @@ int main(){
     printf("Digite o numero de pontos turisticos: \n");
     scanf("%d",&pontosTur1);
 
+    //leitura de dados cidade 2
     printf("\nDigite as informações da carta 2: \n");
     printf("Estado de A a H: \n"); 
     scanf(" %c", &estado2); 
@@ -41,8 +42,15 @@ int main(){
     printf("Digite o numero de pontos turisticos: \n");
     scanf("%d", &pontosTur2);
 
+    //calcular dencidade populacional
+    denpopulacional1 =(float) populacao1/area1;
+    denpopulacional2 =(float) populacao2/area2;
 
-    //escrita de resultados
+    //cacular PIB per capita
+    pibpercapita1 =(float) pib1/populacao1;
+    pibpercapita2 = (float) pib2/populacao2;
+
+    //escrita de resultados cicade 1
     printf("\nCarta 1: \n");
     printf("Estado: %c\n",estado1);
     printf("Codigo: %s\n",codc1);
@@ -51,7 +59,10 @@ int main(){
     printf("Area: %.2f km²\n",area1);
     printf("PIB: %.2f bilhões de reais\n",pib1);
     printf("Numero de Pontos Turisticos: %d\n",pontosTur1);
-    
+    printf("Densidade Populacional: %.2f hab/km²\n",denpopulacional1);
+    printf("PIB per Capita: %.2f reais\n",pibpercapita1);
+
+    //escrita de resultados cicade 2
     printf("\nCarta 2: \n");
     printf("Estado: %c\n",estado2);
     printf("Codigo: %s\n",codc2);
@@ -60,5 +71,7 @@ int main(){
     printf("Area: %.2f km²\n",area2);
     printf("PIB: %.2f bilhões de reais\n",pib2);
     printf("Numero de Pontos Turisticos: %d\n",pontosTur2);
+    printf("Densidade Populacional: %.2f hab/km²\n",denpopulacional2);
+    printf("PIB per Capita: %.2f reais\n",pibpercapita2);
     
 } 
