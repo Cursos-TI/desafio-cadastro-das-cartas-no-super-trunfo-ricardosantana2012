@@ -1,22 +1,27 @@
 #include <stdio.h>
+#include <string.h>
 
 int main(){
 
     int pontosTur1,pontosTur2;
     unsigned long int populacao1,populacao2;
     float area1,area2,pib1,pib2,pibpercapita1,pibpercapita2,denpopulacional1,denpopulacional2,superpodercarta1, superpodercarta2;
-    char estado1,estado2;
-    char cidade1[50],cidade2[50],codc1[4],codc2[4];
+    char estado1[3],estado2[3];
+    char cidade1[30],cidade2[30],codc1[4],codc2[4];
+    
+   
 
 
     //leitura de dados cidade 1
     printf("Digite as informações da carta 1: \n");
-    printf("Estado de A a H: "); 
-    scanf(" %c", &estado1);
+    printf("Digite a sigla do Estado: "); 
+    scanf(" %s", &estado1);
     printf("Digite o codigo da carta: ");
     scanf(" %s", &codc1);
     printf("Digite o nome da Cidade: ");
-    scanf("%s", &cidade1);
+    getchar(); //lipar \n do enter para fgets funcionar
+    fgets(cidade1, sizeof(cidade1), stdin); // ler string com espaço
+    cidade1[strcspn(cidade1, "\n")] = '\0'; //remove a quebra de linha
     printf("Digite o numero de habitantes: ");
     scanf("%u",&populacao1);
     printf("Digite a area em km2: ");
@@ -28,12 +33,16 @@ int main(){
 
     //leitura de dados cidade 2
     printf("\nDigite as informações da carta 2: \n");
-    printf("Estado de A a H: "); 
-    scanf(" %c", &estado2); 
+    printf("Digite a sigla do Estado: "); 
+    scanf(" %s", &estado2); 
     printf("Digite o codigo da carta: ");
     scanf(" %s", &codc2);
     printf("Digite o nome da Cidade: ");
-    scanf("%s", &cidade2);
+    
+    getchar(); //lipar \n do enter para fgets funcionar
+    fgets(cidade2, sizeof(cidade2), stdin); // ler string com espaço
+    cidade2[strcspn(cidade2, "\n")] = '\0'; //remove a quebra de linha
+    
     printf("Digite o numero de habitantes: ");
     scanf("%u",&populacao2);
     printf("Digite a area em km2: ");
@@ -57,7 +66,7 @@ int main(){
 
     //escrita de resultados cicade 1
     printf("\nCarta 1: \n");
-    printf("Estado: %c\n",estado1);
+    printf("Estado: %s\n",estado1);
     printf("Codigo: %s\n",codc1);
     printf("Nome da Cidade: %s\n",cidade1);
     printf("Populacao: %u\n",populacao1);
@@ -78,17 +87,20 @@ int main(){
     printf("PIB: %.2f bilhões de reais\n",pib2);
     printf("Numero de Pontos Turisticos: %d\n",pontosTur2);
     printf("Densidade Populacional: %.2f hab/km²\n",denpopulacional2);
-    printf("PIB per Capita: a%.2f reais\n",pibpercapita2);
+    printf("PIB per Capita: %.2f reais\n",pibpercapita2);
     printf("Super poder: %.2f\n",superpodercarta2);
 
+ 
+    //Coparação de cartas usando if
+    printf("\nComparação de cartas (Atributo: Numero de pontos turisticos):\n");
 
-    //comparar cartas e exibir vencedor (1 = verdadeiro, 0 = falso)
-    printf("\nPopulação: Carta 1 venceu (%d)\n",(populacao1>pontosTur2));
-    printf("Área: Carta 1 venceu (%d)\n",(area1>area2));
-    printf("PIB: Carta 1 venceu (%d)\n",(pib1>pib2));
-    printf("Pontos Turísticos: Carta 1 venceu (%d)\n",(pontosTur1>pontosTur2));
-    printf("Densidade Populacional: Carta 2 venceu (%d)\n",(denpopulacional1> denpopulacional2));
-    printf("PIB per Capita: Carta 1 venceu (%d)\n",(pibpercapita1> pibpercapita2));
-    printf("Super Poder: Carta 1 venceu (%d)\n",(superpodercarta1>superpodercarta2));
-    
+    printf("\nCarta 1 - %s (%s): %d",cidade1,estado1,pontosTur1);
+    printf("\nCarta 2 - %s (%s): %d",cidade2,estado2,pontosTur2);
+    if(pontosTur1>pontosTur2){
+        printf("\nResultado: Carta 1 (%s) venceu!",cidade1);
+    }if(pontosTur1<pontosTur2){
+        printf("\nResultado: Carta 2 (%s) venceu!",cidade2);
+    }else{
+        printf("\nEmpate entre os atributos");
+    }
 }
